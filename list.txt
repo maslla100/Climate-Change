@@ -1,0 +1,75 @@
+---- START OF ./requirements.txt ----
+---- END OF ./requirements.txt ----
+
+---- START OF ./config/runtime.txt ----
+---- END OF ./config/runtime.txt ----
+
+---- START OF ./config/Procfile ----
+web: gunicorn src.app.app:app
+---- END OF ./config/Procfile ----
+
+---- START OF ./.env ----
+---- END OF ./.env ----
+
+---- START OF ./notebooks/data_cleaning.ipynb ----
+---- END OF ./notebooks/data_cleaning.ipynb ----
+
+---- START OF ./notebooks/data_visualization.ipynb ----
+---- END OF ./notebooks/data_visualization.ipynb ----
+
+---- START OF ./src/app/app.py ----
+---- END OF ./src/app/app.py ----
+
+---- START OF ./src/app/templates/index.html ----
+---- END OF ./src/app/templates/index.html ----
+
+---- START OF ./src/etl/etl_pipeline.py ----
+---- END OF ./src/etl/etl_pipeline.py ----
+
+---- START OF ./src/visualizations/create_visualizations.py ----
+---- END OF ./src/visualizations/create_visualizations.py ----
+
+---- START OF ./src/db/config.py ----
+import os
+
+class Config:
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///local.db')  # Fallback to SQLite locally
+    DEBUG = False
+    TESTING = False
+
+class DevelopmentConfig(Config):
+    DEBUG = True
+
+class ProductionConfig(Config):
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+
+config = {
+    'development': DevelopmentConfig,
+    'production': ProductionConfig
+}
+---- END OF ./src/db/config.py ----
+
+---- START OF ./src/db/models.py ----
+---- END OF ./src/db/models.py ----
+
+---- START OF ./src/db/database.py ----
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+import os
+
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost/dbname")
+
+engine = create_engine(DATABASE_URL)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+Base = declarative_base()
+
+# Dependency to get the DB session
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+---- END OF ./src/db/database.py ----
+
