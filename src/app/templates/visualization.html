@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Climate Change Visualizations</title>
+    <script src="https://cdn.bokeh.org/bokeh/release/bokeh-3.4.0.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -24,9 +25,10 @@
             margin-bottom: 40px;
         }
 
-        img {
-            max-width: 100%;
-            height: auto;
+        iframe {
+            width: 100%;
+            height: 500px;
+            border: none;
         }
     </style>
 </head>
@@ -36,35 +38,34 @@
 
     <div class="visualization">
         <h2>1. Global Temperature Anomalies Over Time</h2>
-        <img src="/static/global_temperature_anomaly.png" alt="Global Temperature Anomalies Over Time">
+        <iframe src="/static/global_temperature_anomaly.html"></iframe>
     </div>
 
     <div class="visualization">
         <h2>2. Average Monthly Temperature Anomalies</h2>
-        <img src="/static/monthly_anomalies.png" alt="Average Monthly Temperature Anomalies">
+        <iframe src="/static/monthly_anomalies.html"></iframe>
     </div>
 
     <div class="visualization">
         <h2>3. Temperature Anomalies: Northern vs Southern Hemisphere</h2>
-        <img src="/static/hemisphere_anomalies_comparison.png"
-            alt="Northern vs Southern Hemisphere Temperature Anomalies">
+        <iframe src="/static/hemisphere_anomalies_comparison.html"></iframe>
     </div>
 
     <div class="visualization">
         <h2>4. Seasonal Temperature Anomalies Over Time</h2>
-        <img src="/static/seasonal_anomalies.png" alt="Seasonal Temperature Anomalies Over Time">
+        <iframe src="/static/seasonal_anomalies.html"></iframe>
     </div>
 
     <div class="visualization">
         <h2>5. Heatmap of Monthly Temperature Anomalies Over Time</h2>
-        <img src="/static/monthly_anomalies_heatmap.png" alt="Heatmap of Monthly Temperature Anomalies Over Time">
+        <iframe src="/static/monthly_anomalies_heatmap.html"></iframe>
     </div>
 
     <div class="visualization">
         <h2>6. Interactive Global Temperature Anomalies Over Time</h2>
-        <div>{{ global_temp_html|safe }}</div>
+        <div>{{ plot_div|safe }}</div>
+        {{ plot_script|safe }}
     </div>
-
 
 </body>
 

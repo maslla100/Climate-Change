@@ -4,12 +4,15 @@ from sqlalchemy.orm import sessionmaker
 import os
 
 # Pull DATABASE_URL from environment variable
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:your_password@localhost/climate_change")
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:@localhost/climate_change")
 
 # Create the database engine
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
+# Import models
+from src.db.models import GlobalMonthly, NorthernHemisphere, SouthernHemisphere, ZoneAnnual
 
 # Dependency to get the DB session
 def get_db():
@@ -18,3 +21,8 @@ def get_db():
         yield db
     finally:
         db.close()
+
+# Create tables if they don't exist
+Base.metadata.create_all(engine)
+
+print("Tables have been created successfully!")
