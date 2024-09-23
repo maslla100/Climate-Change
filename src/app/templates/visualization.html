@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Climate Change Visualizations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #666;
+        }
+
+        .visualization {
+            margin-bottom: 40px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Climate Change Impact Visualizations</h1>
+
+    <div class="visualization">
+        <h2>1. Global Temperature Anomalies Over Time</h2>
+        <img src="/static/global_temperature_anomaly.png" alt="Global Temperature Anomalies Over Time">
+    </div>
+
+    <div class="visualization">
+        <h2>2. Average Monthly Temperature Anomalies</h2>
+        <img src="/static/monthly_anomalies.png" alt="Average Monthly Temperature Anomalies">
+    </div>
+
+    <div class="visualization">
+        <h2>3. Temperature Anomalies: Northern vs Southern Hemisphere</h2>
+        <img src="/static/hemisphere_anomalies_comparison.png"
+            alt="Northern vs Southern Hemisphere Temperature Anomalies">
+    </div>
+
+    <div class="visualization">
+        <h2>4. Seasonal Temperature Anomalies Over Time</h2>
+        <img src="/static/seasonal_anomalies.png" alt="Seasonal Temperature Anomalies Over Time">
+    </div>
+
+    <div class="visualization">
+        <h2>5. Heatmap of Monthly Temperature Anomalies Over Time</h2>
+        <img src="/static/monthly_anomalies_heatmap.png" alt="Heatmap of Monthly Temperature Anomalies Over Time">
+    </div>
+
+    <div class="visualization">
+        <h2>6. Interactive Global Temperature Anomalies Over Time</h2>
+        <div>{{ global_temp_html|safe }}</div>
+    </div>
+
+
+</body>
+
+</html>
