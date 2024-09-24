@@ -3,20 +3,27 @@ import os
 import pandas as pd
 import hvplot.pandas  # Import hvplot for pandas integration
 from sqlalchemy.orm import Session
+from sqlalchemy import create_engine
 
 # Add the project root to sys.path before importing from src
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
 
-# Import the engine and models after adding to sys.path
-from src.db.database import engine
-from src.db.models import GlobalMonthly, NorthernHemisphere, SouthernHemisphere
+# Fetch the DATABASE_URL from environment variable
+DATABASE_URL = os.getenv('DATABASE_URL')
 
-# Print out the sys.path for debugging
-print("Current sys.path:", sys.path)
+# Fix DATABASE_URL for SQLAlchemy (Heroku provides "postgres://", but SQLAlchemy expects "postgresql://")
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+# Create the engine
+engine = create_engine(DATABASE_URL)
 
 # Ensure the output directory exists
 output_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../src/app/static/'))
 os.makedirs(output_dir, exist_ok=True)
+
+# Import the models after ensuring the path is added
+from src.db.models import GlobalMonthly, NorthernHemisphere, SouthernHemisphere
 
 # Query data from the database
 try:

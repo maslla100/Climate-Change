@@ -6,6 +6,10 @@ import os
 # Pull DATABASE_URL from environment variable
 DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:@localhost/climate_change")
 
+# Fix Heroku's postgres:// URI if needed
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
 # Create the database engine
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
