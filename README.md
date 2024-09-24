@@ -72,7 +72,7 @@ To run this project locally, follow these steps:
    ```
 4. **Run the Flask/Dash Application**:
    ```bash
-   python app.py
+   flask run
    ```
 
 ## Usage
@@ -85,7 +85,7 @@ To run this project locally, follow these steps:
 
 ## Deployment
 The project is deployed on GitHub Pages/Heroku. You can view the live application here:
-- [Live Application](https://your-github-username.github.io/climate-change-impact-project)
+- [Live Application](https://climate-change-6b823b572cf8.herokuapp.com/)
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
