@@ -9,8 +9,14 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'
 # Import Base after ensuring the path is added
 from src.db.database import Base
 
-# Connect to PostgreSQL
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:@localhost/climate_change")
+# Fetch the DATABASE_URL from the environment variable
+DATABASE_URL = os.getenv('DATABASE_URL')
+
+# Fix the DATABASE_URL if it starts with "postgres://"
+if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+
+# Connect to PostgreSQL using the corrected URL
 engine = create_engine(DATABASE_URL)
 
 # Create tables if they don't exist (this uses your models to create the schema)
@@ -51,4 +57,3 @@ def load_data():
 
 if __name__ == "__main__":
     load_data()
-
